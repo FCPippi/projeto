@@ -10,7 +10,7 @@ async function bootstrap() {
 
   // Security
   app.use(helmet());
-  app.use(compression());
+  app.use(compression() as any);
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -42,4 +42,5 @@ async function bootstrap() {
   console.log(`Application is running on: http://localhost:${port}`);
   console.log(`Swagger documentation: http://localhost:${port}/api`);
 }
-bootstrap();
+
+void bootstrap();
