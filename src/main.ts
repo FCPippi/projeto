@@ -3,14 +3,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import helmet from 'helmet';
-import compression from 'compression';
+import * as compression from 'compression';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Security
   app.use(helmet());
-  app.use(compression() as any);
+  app.use(compression());
 
   // Global validation pipe
   app.useGlobalPipes(
@@ -42,5 +42,4 @@ async function bootstrap() {
   console.log(`Application is running on: http://localhost:${port}`);
   console.log(`Swagger documentation: http://localhost:${port}/api`);
 }
-
-void bootstrap();
+bootstrap();
