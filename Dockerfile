@@ -37,6 +37,13 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 COPY package.json ./
+COPY docker-entrypoint.sh ./
+
+# Generate Prisma client in production stage
+RUN npx prisma generate
+
+# Make script executable
+RUN chmod +x docker-entrypoint.sh
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
@@ -45,4 +52,4 @@ USER nestjs
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:prod"]
+CMD ["./docker-entrypoint.sh"]
