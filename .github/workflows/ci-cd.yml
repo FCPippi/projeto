@@ -45,7 +45,7 @@ jobs:
       - name: Deploy via SSH
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
-            cd ProjetoCora && 
+            cd projeto && 
             git pull && 
             docker-compose pull && 
             docker-compose up -d
